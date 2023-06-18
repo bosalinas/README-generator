@@ -28,7 +28,7 @@ inquirer
             type: 'list',
             message: 'Which license would you like?',
             name: 'license',
-            choices: ['MIT', 'Apache', 'None'],
+            choices: ['mit', 'apache', 'None'],
         }
     ])
     .then((answers) => {
@@ -36,8 +36,11 @@ inquirer
         
 
         fs.writeFile("README.md", `
-Table of Contents 
+![License](# https://img.shields.io/badge/you_ok-${answers.license}-blue)
+# Table of Contents
 [License](#${answers.license})
+[License](#${answers.license})
+
 # ${answers.title}
 ## ${answers.motivation}
 ## ${answers.license}
