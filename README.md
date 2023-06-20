@@ -1,5 +1,9 @@
 
+<<<<<<< HEAD
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+=======
+![License](#https://img.shields.io/badge/you_ok-mit-blue)
+>>>>>>> a61ff70093c4db40aadbb4e04bffbe71b0e3e294
 # Table of Contents
 - [License](#Apache)
 - [Description](#descript)
