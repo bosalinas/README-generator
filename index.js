@@ -6,56 +6,96 @@ inquirer
     .prompt([
         {
             type: 'input',
-            name: 'motivation',
-            message: 'What was your motivation?',
+            name: 'github',
+            message: 'What is your GitHub username?',
         },
         {
             type: 'input',
-            message: 'Why did you build this project?',
-            name: 'project',
+            name: 'email',
+            message: 'What is your preferred email?',
         },
         {
             type: 'input',
-            message: 'What problem does it solve?',
-            name: 'problem',
+            name: 'title',
+            message: 'What is the title of your project?',
         },
         {
             type: 'input',
-            message: 'What did you learn?',
-            name: 'learn',
+            name: 'description',
+            message: 'What is a good description for your project?',
+        },
+        {
+            type: 'input',
+            message: 'What do you want to include as installation instructions?',
+            name: 'installation',
+        },
+        {
+            type: 'input',
+            message: 'What do you want to include for usage information?',
+            name: 'usage',
+        },
+        {
+            type: 'input',
+            message: 'What do you want your contribution guidelines to say?',
+            name: 'contribution',
+        },
+        {
+            type: 'input',
+            message: 'What do you want to include as test instructions?',
+            name: 'test',
         },
         {  
             type: 'list',
-            message: 'Which license would you like?',
+            message: 'Which license do you want for this project?',
             name: 'license',
-            choices: ['mit', 'apache', 'None'],
+            choices: ['MIT', 'Apache', 'GPLv2', 'None'],
         }
     ])
+
     .then((answers) => {
-        //* How to include a .md rather than HTML
-        
 
         fs.writeFile("README.md", `
-![License](# https://img.shields.io/badge/you_ok-${answers.license}-blue)
+${renderLicense(answers.license)}
 # Table of Contents
-[License](#${answers.license})
-[License](#${answers.license})
+- [License](#${answers.license})
+- [Description](#${answers.description})
+- [Usage](#${answers.usage})
+- [Installation](#${answers.installation})
+- [Contributions](#${answers.contribution})
+- [Testing](#${answers.test})
+- [Questions](#${answers.questions})
 
 # ${answers.title}
-## ${answers.motivation}
-## ${answers.license}
+## The license for this project is ${answers.license}.
+## Project Description 
+#### ${answers.description}
+## Project Usage
+#### ${answers.usage}
+## Project Installation 
+#### ${answers.installation}
+## Project Contribution Guidelines
+#### ${answers.contribution}
+## Project Test Instructions 
+#### ${answers.test}
+## Project Questions
+#### [Github Profile](https://github.com/${answers.github})
+#### If you have additional questions please reach to me via ${answers.email}
 
         `, (err) =>
             err ? console.log(err) : console.log('Created README File!')
         );
     });
 
-
-
-// TODO: Create a function to initialize app
-// function init() { }
-
-// Function call to initialize app
-// init();
-
-//
+    const renderLicense = (license) => {
+        if (license == "MIT") {
+          return "[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)";
+        } else if (license == "Apache") {
+          return "[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)";
+        } else if (license == "GPLv2") {
+          return "[![License: GPL v2](https://img.shields.io/badge/License-GPL_v2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)";
+        } else if (license == "None") {
+          return "No Licenses were used.";
+        } else {
+          return "";
+        }
+      };
